@@ -1,9 +1,9 @@
 (ns drift.test-generator
-  (:use clojure.test
-        drift.generator
-        test-helper)
-  (:require config.finished-config
-            [drift.builder :as builder]))
+   (:require [config.finished-config]
+             [drift.builder :as builder]
+             [clojure.test :refer :all]
+             [drift.generator :refer :all]
+             [test-helper :refer :all]))
 
 (deftest test-migration-usage
   (migration-usage))

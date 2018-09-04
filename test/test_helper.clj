@@ -2,7 +2,7 @@
   (:import [java.io File]
            [org.apache.log4j ConsoleAppender Level Logger PatternLayout]
            [org.apache.log4j.varia LevelRangeFilter])
-  (:use clojure.test))
+  (:require [clojure.test :refer :all]))
 
 (def output-pattern (new PatternLayout "%-5p [%c]: %m%n"))
 
@@ -15,14 +15,14 @@
   (.setLevel Level/ALL)
   (.addAppender console-appender))
 
-(defn 
+(defn
 #^{:doc "Verifies the given file is not nil, is an instance of File, and has the given name."}
   test-file [file expected-file-name]
   (is file)
   (is (instance? File file))
   (when file
     (is (= expected-file-name (.getName file)))))
-  
+
 (defn
 #^{:doc "Simply calls test-file on the given directory and name."}
   test-directory [directory expected-directory-name]

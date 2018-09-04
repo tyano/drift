@@ -1,5 +1,6 @@
 (ns drift.test-args
-  (:use clojure.test drift.args))
+  (:require [clojure.test :refer :all]
+            [drift.args :refer :all]))
 
 (deftest test-split-args
   (is (=  (split-args ["foo" "-v" "bar" "baz"] #{"-v"} )

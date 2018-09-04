@@ -1,5 +1,6 @@
 (ns drift.core
   (:import [java.io File]
+           [java.net URL]
            [java.util Comparator TreeSet])
   (:require [clojure.string :as string]
             [clojure.tools.logging :as logging]
@@ -111,10 +112,26 @@
   (when-let [migration-namespaces (config/migration-namespaces)]
     (migration-namespaces (config/find-migrate-dir-name) (migrate-namespace-prefix))))
 
+(defn- all-files-in-subdir
+  [parent-dir sub-dir]
+  (let [target-dir (File. parent-dir sub-dir)]
+    (if (and (.exists target-dir) (.isDirectory target-dir))
+      (.listFiles target-dir)
+      [])))
+
+(defn- all-class-path-file-names
+  [migrate-dir]
+  (let [all-root-files (->> (enumeration-seq (.. (Thread/currentThread)
+                                                 (getContextClassLoader)
+                                                 (getResources "")))
+                            (map #(.getPath ^URL %)))]
+    (->> (mapcat #(all-files-in-subdir % migrate-dir) all-root-files)
+         (map #(.getName %)))))
+
 (defn default-migration-namespaces []
   (map namespace-string-for-file
        (filter #(re-matches #".*\.clj$" %)
-               (loading-utils/all-class-path-file-names (migrate-namespace-dir)))))
+               (all-class-path-file-names (migrate-namespace-dir)))))
 
 (defn sort-migration-namespaces
   ([migration-namespaces] (sort-migration-namespaces migration-namespaces true))

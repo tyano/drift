@@ -1,5 +1,5 @@
 (ns config.dynamic-config
-  (use clojure.test))
+  (:require [clojure.test :refer :all]))
 
 (defn config []
 

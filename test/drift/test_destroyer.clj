@@ -1,7 +1,7 @@
 (ns drift.test-destroyer
-  (:use clojure.test
-        drift.destroyer
-        test-helper))
+  (:require [clojure.test :refer :all]
+            [drift.destroyer :refer :all]
+            [test-helper :refer :all]))
 
 (deftest test-migration-usage
   (migration-usage))

@@ -1,9 +1,9 @@
 (ns drift.test-execute
-  (:use clojure.test
-        drift.execute)
   (:require [config.migrate-config :as config]
-            config.finished-config
-            [test-helper :as test-helper]))
+            [config.finished-config]
+            [test-helper :as test-helper]
+            [clojure.test :refer :all]
+            [drift.execute :refer :all]))
 
 (deftest test-version-number
   (is (= 0 (version-number 0)))

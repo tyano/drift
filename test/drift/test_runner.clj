@@ -1,10 +1,10 @@
 (ns drift.test-runner
-  (:use clojure.test
-        drift.runner)
   (:require [drift.core :as core]
             [drift.listener-protocol :as listener-protocol]
             [drift.version :as version]
-            [test-helper :as test-helper])
+            [test-helper :as test-helper]
+            [clojure.test :refer :all]
+            [drift.runner :refer :all])
   (:import [drift.listener_protocol ListenerProtocol]))
 
 (def first-migration "create-tests")

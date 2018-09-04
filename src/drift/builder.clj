@@ -8,10 +8,10 @@
             [drift.core :as core]
             [drift.config :as config]))
 
-(defn 
+(defn
 #^{ :doc "Finds or creates if missing, the migrate directory in the given db directory." }
   find-or-create-migrate-directory
-  ([] (find-or-create-migrate-directory (core/migrate-directory))) 
+  ([] (find-or-create-migrate-directory (core/migrate-directory)))
   ([migrate-directory]
     (when migrate-directory
       (if (.exists migrate-directory)
@@ -36,7 +36,7 @@
 (defn
 #^{ :doc "Creates a new migration file from the given migration name." }
   create-migration-file
-  ([migration-name] (create-migration-file (find-or-create-migrate-directory) migration-name)) 
+  ([migration-name] (create-migration-file (find-or-create-migrate-directory) migration-name))
   ([migrate-directory migration-name]
     (if (and migrate-directory migration-name)
       (let [migration-file-name (str (migration-number) "_" (loading-utils/dashes-to-underscores migration-name) ".clj")

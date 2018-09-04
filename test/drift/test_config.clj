@@ -1,8 +1,9 @@
 (ns drift.test-config
   (:import [java.io File])
-  (:use clojure.test drift.config)
   (:require [test-helper :as test-helper]
-            [config.migrate-config :as migrate-config]))
+            [config.migrate-config :as migrate-config]
+            [clojure.test :refer :all]
+            [drift.config :refer :all]))
 
 (deftest test-find-config-namespace
   (is (find-config-namespace)))
